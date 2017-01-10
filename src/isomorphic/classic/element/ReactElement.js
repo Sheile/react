@@ -216,9 +216,20 @@ ReactElement.createElement = function(type, config, children) {
   if (childrenLength === 1) {
     props.children = children;
   } else if (childrenLength > 1) {
-    var childArray = Array(childrenLength);
-    for (var i = 0; i < childrenLength; i++) {
-      childArray[i] = arguments[i + 2];
+    var childArray;
+    if(Array.isArray(children)) {
+      childArray = Array(children.length + childrenLength - 1);
+      for (var i = 0; i < children.length; i++) {
+        childArray[i] = children[i];
+      }
+      for (var i = 0; i < childrenLength - 1; i++) {
+        childArray[i + children.length] = arguments[i + 3];
+      }
+    } else {
+      childArray = Array(childrenLength);
+      for (var i = 0; i < childrenLength; i++) {
+        childArray[i] = arguments[i + 2];
+      }
     }
     if (__DEV__) {
       if (Object.freeze) {
