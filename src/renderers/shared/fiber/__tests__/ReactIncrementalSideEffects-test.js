@@ -963,7 +963,7 @@ describe('ReactIncrementalSideEffects', () => {
           <div>
             {props.show ? <Bar key="g" name="G" /> : null}
           </div>
-          <Bar name="this should not unmount" />
+          <Bar key="h" name="this should not unmount" />
         </div>
       );
     }
